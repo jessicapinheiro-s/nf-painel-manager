@@ -1,0 +1,21 @@
+services:
+  api:
+    build: ./backend
+    container_name: safe-droop-api
+    ports: 
+      - "3000:3000"
+    depends_on:
+      - postgres
+      - mondodb
+  postgres:
+    image: postgres:15
+    environment:
+      POSTGRES_USER: admin
+      POSTGRES_PASSWORD: password123
+      POSTGRES_DB: auth_db
+    ports:
+      - "5432:5432"
+  mondodb:
+    image: mongo:4.4
+    ports:
+      - "27017:27017"
