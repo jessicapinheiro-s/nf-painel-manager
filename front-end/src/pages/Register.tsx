@@ -1,6 +1,8 @@
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
+import type { PropsUserRegister } from "../types/types-global";
+import { registerUser } from "../repository/auth-repository";
 
 // Schema de validação
 const registerSchema = z.object({
@@ -26,9 +28,15 @@ const RegisterPage = () => {
     resolver: zodResolver(registerSchema),
   });
 
-  const onSubmit = (data) => {
-    console.log("Register data:", data);
-    // chamada API aqui
+  const onSubmit = async ({email, password}: PropsUserRegister) => {
+    console.log(email, password)
+    if(!email || !password){
+        console.error('no email ou no password')
+        return 
+    }
+    const res = await registerUser({email, password})
+    
+    console.log(res);
   };
 
   return (

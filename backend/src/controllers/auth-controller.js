@@ -1,5 +1,12 @@
-export const auth_register = (req, res) => {
-    
+import { f_auth_register } from "../services/auth-service.js";
+
+export const auth_register = async(req, res) => {
+    const response = await f_auth_register(req.body);
+
+    res.status(200).json({
+        sucess: true,
+        data: response
+    });
 } 
 export const auth_login = (req, res) => {
 

@@ -10,8 +10,8 @@ import { auth } from "../../src/middlewares/auth.js";
 var auth_router = Router();
 
 /* GET users listing. */
-auth_router.get("/register", validate(schemaAuthRegister), authLimiter, auth_register);
-auth_router.get("/login", auth, validate(schemaAuthLogin), authLimiter, auth_login);
+auth_router.post("/register", validate(schemaAuthRegister), authLimiter, auth_register);
+auth_router.post("/login", auth, validate(schemaAuthLogin), authLimiter, auth_login);
 auth_router.get("/logout", auth, auth_logout);
 
 export default auth_router;
