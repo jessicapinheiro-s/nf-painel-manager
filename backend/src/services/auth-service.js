@@ -1,5 +1,6 @@
 import { getUserByEmail } from "src/repository/users-repository.js";
 import { prisma } from "../../prisma/prisma.js";
+import bcrypt from "bcrypt";
 
 export const f_auth_register = async (info_req) => {
     
@@ -21,6 +22,7 @@ export const f_auth_register = async (info_req) => {
 }
 
 export const f_auth_login = async(info_req) => {
+
     const {
         email,
         password
@@ -34,7 +36,13 @@ export const f_auth_login = async(info_req) => {
     const userExists = await getUserByEmail(email);
 
     if(!userExists) {
-        throw new Error("User don't exist");
+        throw new Error("User does not exist");
+    }
+
+    const isValidPassword = await bcrypt.compare(password, userExists.password);
+
+    if(!isValidPassword) {
+        throw new Error("wrong password");
     }
 
     const user_payload = {
@@ -42,7 +50,14 @@ export const f_auth_login = async(info_req) => {
         email: userExists.email
     }
     const secret = process.env.JWT_TOKEN;
-    
+    const token = generate_jwt_token(user_payload, secret, "1hr");
+    const user = userExists;
+
+    if(!token) {
+        throw new error ('problem to generate user token')
+    }
+
+    return token;
 }
 
 export const f_auth_logout = async(info_req) => {
