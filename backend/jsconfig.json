@@ -1,11 +1,11 @@
 {
   "compilerOptions": {
     "module": "ESNext",
-    "moduleResolution": "node",
-    "checkJs": true,
+    "moduleResolution": "bundler",
+    "checkJs": false,
+    "skipLibCheck": true,
     "target": "ES2020",
     "allowJs": true,
-    "baseUrl": ".",
     "lib": ["ES2020"]
   },
   "exclude": ["node_modules"],
