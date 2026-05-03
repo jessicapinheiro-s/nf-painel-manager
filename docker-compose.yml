@@ -1,14 +1,14 @@
 services:
   api:
     build: ./backend
-    container_name: safe-droop-api
+    container_name: safe-dr
     ports: 
       - "3000:3000"
     depends_on:
       - postgres
       - mongodb
     env_file:
-    - ./backend/.env
+      - ./backend/.env
   postgres:
     image: postgres:15
     environment:
@@ -21,3 +21,15 @@ services:
     image: mongo:4.4
     ports:
       - "27017:27017"
+
+  frontend:
+    build: ./front-end
+    container_name: safe-drop-front
+    ports:
+      - "5171:5173"
+    depends_on:
+      - api
+    volumes:
+      - ./front-end:/app
+      - /app/node_modules
+  
