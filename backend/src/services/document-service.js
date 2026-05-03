@@ -1,4 +1,4 @@
-import { generate_safe_name } from "src/utils/utils";
+import { generate_safe_name } from "../utils/utils.js";
 
 export const f_upload_document = async (req_body) => {
   const allowedTypes = ["application/pdf"];

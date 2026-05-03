@@ -1,4 +1,4 @@
-import { f_upload_document } from "src/services/document-service";
+import { f_upload_document } from "../services/document-service.js";
 
 export const createDocument = async(req, res) => {
     const response = await f_upload_document(req);

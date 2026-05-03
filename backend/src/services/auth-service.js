@@ -1,4 +1,4 @@
-import { getUserByEmail } from "src/repository/users-repository.js";
+import { getUserByEmail } from "../repository/users-repository.js";
 import { prisma } from "../../prisma/prisma.js";
 import bcrypt from "bcrypt";
 
