@@ -1,11 +1,17 @@
 import { create } from "zustand";
 
 type User = {
-  user: any;
+  user: {
+    id: number,
+    email: string;
+  };
   setUser: (User: any) => void;
 };
 
 export const useUserStore = create<User>((set) => ({
-  user: null,
+  user: {
+    id: 0,
+    email: ""
+  },
   setUser: (User: any) => set({ user: User }),
 }));

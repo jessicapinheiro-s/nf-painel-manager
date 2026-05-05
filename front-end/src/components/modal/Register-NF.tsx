@@ -4,6 +4,8 @@ import z from "zod";
 import { useModalStore } from "../../store/modal-store";
 import { motion } from "framer-motion";
 import { uploadFile } from "../../repository/file-repository";
+import { useUserStore } from "../../store/user-store";
+import type { PropsFileUpload } from "../../types/types-global";
 
 type FormData = {
     file: FileList;
@@ -15,6 +17,8 @@ export const RegisterNfFormModal = () => {
     })
 
     const { item } = useModalStore();
+    const { user } = useUserStore();
+
     const {
         register,
         handleSubmit,
@@ -25,9 +29,19 @@ export const RegisterNfFormModal = () => {
     });
 
     const file = watch("file");
-    
-    const onSubmit = async() => {
-        const res = await uploadFile();
+
+
+    const onSubmit = async (data: FormData) => {
+        const file = data.file[0];
+        console.log(file)
+
+        const formData = new FormData();
+        formData.append("file", String(data.file[0]));
+
+        const res = await uploadFile({userId: user.id, file: formData});
+        if(res.sucess) {
+            
+        }
     }
 
     return (

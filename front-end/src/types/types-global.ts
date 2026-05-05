@@ -23,3 +23,10 @@ export interface PropsCard {
 export interface PropsCardBody {
     children: ReactNode
 }
+
+export interface PropsFileUpload{
+    userId: number,
+    file: FormData
+}
+
+

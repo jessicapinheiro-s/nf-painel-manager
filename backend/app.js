@@ -38,7 +38,7 @@ app.use(express.static(path.join(__dirname, "public")));
 
 app.use("/", index_router);
 app.use("/auth", auth_router);
-app.use("/document", document_router);
+app.use("/file", document_router);
 
 app.use(globalLimiter);
 
