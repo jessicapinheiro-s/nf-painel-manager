@@ -10,7 +10,6 @@ import index_router from "./src/routes/index.js";
 import auth_router from "./src/routes/auth-route.js";
 import document_router from "./src/routes/document-route.js";
 import { errorMiddleware } from "./src/middlewares/error.js";
-import cookieParser from "cookie-parser";
 
 // Configuração para emular o __dirname em ES Modules
 const __filename = fileURLToPath(import.meta.url);
@@ -36,7 +35,6 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, "public")));
 
-app.use(cookieParser());
 
 app.use("/", index_router);
 app.use("/auth", auth_router);
