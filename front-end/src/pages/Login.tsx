@@ -2,6 +2,7 @@ import { useNavigate } from "react-router-dom";
 import { useForm } from 'react-hook-form';
 import { z } from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
+import { login } from "../repository/auth-repository";
 
 // Schema de validação
 const loginSchema = z.object({
@@ -23,9 +24,9 @@ const LoginPage = () => {
 
   const navigate = useNavigate();
 
-  const onSubmit = (data) => {
-    console.log("Login data:", data);
-    // Simulação de chamada API
+  const onSubmit = async({email, password}) => {
+    const res = await login({email, password});
+    console.log(res);
   };
 
   return (
