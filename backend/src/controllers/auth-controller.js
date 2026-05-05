@@ -10,8 +10,8 @@ export const auth_register = async(req, res) => {
 } 
 
 export const auth_login = async(req, res) => {
-    const token = await f_auth_login(req);
-    res.cookie("token", token, {
+    const response = await f_auth_login(req);
+    res.cookie("token", response.token, {
         httpOnly: true,
         secure: process.env.NODE_ENV === "production",
         sameSite: "strict",
@@ -19,7 +19,7 @@ export const auth_login = async(req, res) => {
     })
     res.status(200).json({
         sucess: true,
-        data: response
+        data: response.user
     });
 } 
 

@@ -42,9 +42,12 @@ const LoginPage = () => {
 
     const res = await login({ email, password });
     closeModal();
+    setUser(res.data);
+    if(res.sucess) {
+      navigate('/dashboard-nf');
+    }
 
-    setUser(res.user);
-    console.log(res);
+    
   };
 
   return (

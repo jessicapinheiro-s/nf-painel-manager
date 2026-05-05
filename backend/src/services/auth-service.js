@@ -56,15 +56,21 @@ export const f_auth_login = async(info_req) => {
     if(!secret) {
         throw new error ('problem to generate user token - secret is missing');
     }
-    
+
     const token = generate_jwt_token(user_payload, secret, "1hr");
-    const user = userExists;
+    const user = {
+        email: userExists.email,
+        id: userExists.id
+    };
 
     if(!token) {
         throw new error ('problem to generate user token')
     }
 
-    return token;
+    return {
+        token,
+        user
+    };
 }
 
 export const f_auth_logout = async(info_req) => {
