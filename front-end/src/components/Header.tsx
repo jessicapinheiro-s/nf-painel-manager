@@ -1,55 +1,42 @@
-import { NavLink } from "react-router-dom";
-
+import { FilePlusCorner } from "lucide-react";
+import { useModalStore } from "../store/modal-store";
+import logo from '/online-payment.png'
 export const Header = () => {
-  const linkBase =
-    "px-4 py-2 rounded-lg text-sm font-medium transition";
+  const { openModal, setItem, setType } = useModalStore();
 
-  const linkActive =
-    "bg-gray-900 text-white";
-
-  const linkInactive =
-    "text-gray-600 hover:bg-gray-200";
+  const handleAddNF = () => {
+    setType("form-create-nf");
+    setItem("Register a new Invoice", 'Upload a new Invoice', '')
+    openModal();
+  }
 
   return (
     <header className="w-full bg-white border-b shadow-sm rounded-xl">
-      <div className="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
-        
+      <div className="mx-auto px-6 h-16 flex items-center justify-between">
         {/* Logo / Nome */}
-        <div className="flex items-center gap-6">
-          <h1 className="text-lg font-bold text-gray-800">
+        <div className="flex items-center flex-row gap-2">
+          <img src={logo} alt="logo" width={30} height={30}/>
+          <h1 className="text-xl font-bold text-gray-800">
             NF System
           </h1>
-
-          {/* Navegação */}
-          <nav className="flex gap-2">
-            <NavLink
-              to="/"
-              className={({ isActive }) =>
-                `${linkBase} ${isActive ? linkActive : linkInactive}`
-              }
-            >
-              Dashboard
-            </NavLink>
-
-            <NavLink
-              to="/nfs"
-              className={({ isActive }) =>
-                `${linkBase} ${isActive ? linkActive : linkInactive}`
-              }
-            >
-              Notas Fiscais
-            </NavLink>
-          </nav>
         </div>
+
 
         {/* Ações */}
-        <div>
-          <button 
-          className="bg-gray-900 text-white px-4 py-2 rounded-lg text-sm hover:bg-gray-800 transition"
-          onClick={handleAddNF}>
-            Adicionar Nota Fiscal
+        <div className="hidden md:block">
+          <button
+            className="bg-gray-900 text-white px-4 py-2 rounded-full text-sm hover:bg-gray-800 transition"
+            onClick={handleAddNF}>
+            Register an Invoice
           </button>
         </div>
+
+
+        <button
+          className="md:hidden fixed bottom-6 right-4 bg-gray-900 text-white p-4 rounded-full text-sm hover:bg-gray-800 transition"
+          onClick={handleAddNF}>
+          <FilePlusCorner size={25} />
+        </button>
       </div>
     </header>
   );

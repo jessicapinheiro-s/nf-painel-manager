@@ -2,7 +2,7 @@ import { useState } from "react";
 import { Card, CardBody } from "../components/ui/Card";
 import { Header } from "../components/Header";
 
-const mockData = Array.from({ length: 23 }, (_, i) => ({
+const mockData: PropsNF[] = Array.from({ length: 23 }, (_, i) => ({
     id: i + 1,
     name: `NF-${i + 1}`,
     status: i % 3 === 0 ? "processando" : i % 2 === 0 ? "aprovada" : "pendente",
@@ -13,9 +13,15 @@ const statusStyles = {
     aprovada: "bg-green-100 text-green-600",
     pendente: "bg-gray-200 text-gray-600",
 };
+type Status = "processando" | "aprovada" | "pendente";
 
+interface PropsNF {
+    status: Status,
+    id: number;
+    name: string;
+}
 export const DashboardNF = () => {
-    const [nfs, setNfs] = useState(mockData);
+    const [nfs, setNfs] = useState<PropsNF[]>(mockData);
     const [currentPage, setCurrentPage] = useState(1);
 
     const itemsPerPage = 5;
@@ -31,40 +37,40 @@ export const DashboardNF = () => {
     const cards = [
         {
             title: "Total",
-            text: "Todas as Notas Fiscais cadastradas nesse portal.",
+            text: "All invoices registered in this portal.",
             value: 45,
             colorText: "text-gray-500",
             colorTextPrincipal: "text-yellow-600",
             bg: "bg-white",
         },
         {
-            title: "Processando",
-            text: "Notas fiscais cadastradas em fase de processamento pelo financeiro.",
+            title: "Processing",
+            text: "Invoices currently being processed by the finance team.",
             value: 45,
             colorText: "text-gray-500",
             colorTextPrincipal: "text-blue-600",
             bg: "bg-white",
         },
         {
-            title: "Aprovadas",
-            text: "Notas Fiscais que já foram aprovadas pelo financeiro.",
+            title: "Approved",
+            text: "Invoices that have already been approved by the finance team.",
             value: 45,
             colorText: "text-gray-500",
             colorTextPrincipal: "text-green-600",
             bg: "bg-white",
-        },
+        }
     ];
 
     return (
         <div className="min-h-screen bg-gray-100 p-6 space-y-8">
-            <Header/>
+            <Header />
             {/* Header */}
             <div>
                 <h1 className="text-2xl font-bold text-gray-800">
-                    Dashboard de Notas Fiscais
+                    Invoice Dashboard
                 </h1>
                 <p className="text-gray-500">
-                    Controle e acompanhamento das NFs do sistema
+                    Control and monitoring of invoices in the system.
                 </p>
             </div>
 
@@ -81,7 +87,7 @@ export const DashboardNF = () => {
                                         </h1>
 
                                         <p className={`text-sm ${card.colorText}`}>
-                                           {card.text}
+                                            {card.text}
                                         </p>
                                     </div>
                                     <div >
@@ -98,7 +104,7 @@ export const DashboardNF = () => {
             <div className="bg-white rounded-2xl shadow-sm p-6">
                 <div className="mb-4">
                     <h2 className="text-xl font-semibold text-gray-800">
-                        Notas Fiscais
+                        Invoice
                     </h2>
                     <p className="text-sm text-gray-500">
                         Lista completa das NFs cadastradas
@@ -137,24 +143,24 @@ export const DashboardNF = () => {
                 {/* Paginação */}
                 <div className="flex items-center justify-between mt-6">
                     <button
-                        className="px-4 py-2 rounded-lg bg-gray-200 hover:bg-gray-300 disabled:opacity-50"
+                        className="px-4 py-2 rounded-full bg-gray-200 hover:bg-gray-300 disabled:opacity-50"
                         disabled={currentPage === 1}
                         onClick={() => setCurrentPage((p) => p - 1)}
                     >
-                        Anterior
+                        Previous
                     </button>
 
                     <span className="text-sm text-gray-500">
-                        Página <strong>{currentPage}</strong> de{" "}
+                        Page <strong>{currentPage}</strong> de{" "}
                         <strong>{totalPages}</strong>
                     </span>
 
                     <button
-                        className="px-4 py-2 rounded-lg bg-gray-800 text-white hover:bg-gray-700 disabled:opacity-50"
+                        className="px-4 py-2 rounded-full bg-gray-800 text-white hover:bg-gray-700 disabled:opacity-50"
                         disabled={currentPage === totalPages}
                         onClick={() => setCurrentPage((p) => p + 1)}
                     >
-                        Próxima
+                        Next
                     </button>
                 </div>
             </div>
