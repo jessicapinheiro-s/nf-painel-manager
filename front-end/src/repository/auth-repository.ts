@@ -40,7 +40,7 @@ export const login = async ({ email, password }: PropsUserLogin) => {
     });
 
     if(!response.ok) {
-      return
+      console.log(response)
     }
     const data = await response.json();
     return data;

@@ -10,8 +10,13 @@ export const auth_register = async(req, res) => {
 } 
 
 export const auth_login = async(req, res) => {
-    const response = await f_auth_login(req);
-
+    const token = await f_auth_login(req);
+    res.cookie("token", token, {
+        httpOnly: true,
+        secure: process.env.NODE_ENV === "production",
+        sameSite: "strict",
+        maxAge: 100 * 60 * 60
+    })
     res.status(200).json({
         sucess: true,
         data: response
