@@ -2,13 +2,16 @@ services:
   api:
     build: ./backend
     container_name: safe-dr
-    ports: 
+    ports:
       - "3000:3000"
     depends_on:
       - postgres
       - mongodb
     env_file:
       - ./backend/.env
+    volumes:
+      - ./backend:/app
+      - /app/node_modules
   postgres:
     image: postgres:15
     environment:
@@ -32,4 +35,3 @@ services:
     volumes:
       - ./front-end:/app
       - /app/node_modules
-  
