@@ -6,6 +6,7 @@ import { DashboardNF } from './pages/Dahsboard-nf';
 import { ProtectedLayout } from './ProtectedRoute';
 import { Layout } from './Layout';
 import { PublicRoute } from './PublicRoute';
+import { Account } from './pages/Account';
 
 function App() {
   return (
@@ -19,6 +20,7 @@ function App() {
         </Route>
         <Route element={<ProtectedLayout />}>
           <Route path="/dashboard-nf" element={<DashboardNF />} />
+          <Route path="/account" element={<Account />} />
         </Route>
 
       </Routes>

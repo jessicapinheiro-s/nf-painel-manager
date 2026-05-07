@@ -4,14 +4,11 @@ type User = {
   user: {
     id: number,
     email: string;
-  };
+  } | null;
   setUser: (User: any) => void;
 };
 
 export const useUserStore = create<User>((set) => ({
-  user: {
-    id: 0,
-    email: ""
-  },
+  user: null,
   setUser: (User: any) => set({ user: User }),
 }));
