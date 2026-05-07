@@ -41,13 +41,13 @@ const LoginPage = () => {
     openModal();
 
     const res = await login({ email, password });
+
+    //obter url da imagem do usuário
     closeModal();
     setUser(res.data);
     if(res.sucess) {
       navigate('/dashboard-nf');
     }
-
-    
   };
 
   return (

@@ -19,6 +19,9 @@ export const f_auth_register = async (info_req) => {
         data: {
             email:email,
             password: hashedPassword
+        },
+        select: {
+            email: true
         }
     });
 }
@@ -76,3 +79,4 @@ export const f_auth_login = async(info_req) => {
 export const f_auth_logout = async(info_req) => {
 
 }
+

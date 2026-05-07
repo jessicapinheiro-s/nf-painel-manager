@@ -45,8 +45,6 @@ const RegisterPage = () => {
 
     const res = await registerUser({ email, password })
     closeModal();
-
-    console.log(res);
   };
 
   return (

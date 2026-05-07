@@ -6,6 +6,8 @@ export const ProtectedLayout = () => {
     const { user } = useUserStore();
     const isAuthenticated = user !== null;
 
+    console.log("protected", user)
+
     return isAuthenticated ? <Layout /> : <Navigate to="/" replace />
 }
 

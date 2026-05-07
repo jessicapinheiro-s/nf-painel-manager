@@ -29,4 +29,9 @@ export interface PropsFileUpload{
     file: FormData
 }
 
+export interface PropsUpdateUserData {
+    id: number,
+    name: string
+}
+
 

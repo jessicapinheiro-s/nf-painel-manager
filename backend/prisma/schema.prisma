@@ -9,7 +9,9 @@ generator client {
 model User {
     id  Int @id @default(autoincrement())
     email   String  @unique
+    name    String @default("")
     password    String
+    url_profile_image  String @default("")
     created_at  DateTime @default(now())
     Upload_Logs Upload_Logs[]
 }

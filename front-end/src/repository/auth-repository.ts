@@ -15,7 +15,9 @@ export const registerUser = async ({ email, password }: PropsUserRegister) => {
     });
 
     if (!response.ok) {
-      return;
+      return {
+        sucess: false,
+      };
     }
 
     const data = await response.json();
@@ -32,19 +34,21 @@ export const login = async ({ email, password }: PropsUserLogin) => {
 
   try {
     const response = await fetch(`${URL}/auth/login`, {
-      method: 'POST',
+      method: "POST",
       headers: {
-        "Content-Type": "application/json"
+        "Content-Type": "application/json",
       },
-      body: JSON.stringify({email, password})
+      body: JSON.stringify({ email, password }),
     });
 
-    if(!response.ok) {
-      console.log(response)
+    if (!response.ok) {
+      return {
+        sucess: false,
+      };
     }
     const data = await response.json();
     return data;
-  }catch(error) {
+  } catch (error) {
     throw error;
   }
 };

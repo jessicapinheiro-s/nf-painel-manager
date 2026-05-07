@@ -10,6 +10,7 @@ import index_router from "./src/routes/index.js";
 import auth_router from "./src/routes/auth-route.js";
 import document_router from "./src/routes/document-route.js";
 import { errorMiddleware } from "./src/middlewares/error.js";
+import user_router from "./src/routes/user-route.js"
 
 // Configuração para emular o __dirname em ES Modules
 const __filename = fileURLToPath(import.meta.url);
@@ -39,6 +40,8 @@ app.use(express.static(path.join(__dirname, "public")));
 app.use("/", index_router);
 app.use("/auth", auth_router);
 app.use("/file", document_router);
+app.use("/user", user_router);
+
 
 app.use(globalLimiter);
 
