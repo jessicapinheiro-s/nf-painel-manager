@@ -39,7 +39,7 @@ const RegisterPage = () => {
     }
 
     setItem("Creating Account", "", "")
-    setClassName("w-[400px] max-h-[30vh]");
+    setClassName("w-[200px] max-h-[20vh]");
     setType("loanding");
     openModal();
 

@@ -1,4 +1,4 @@
-import { Camera, User } from "lucide-react";
+import { Camera, LogOut, User } from "lucide-react";
 import { useUserStore } from "../store/user-store";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -43,15 +43,17 @@ export const Account = () => {
     };
 
     return (
-        <div className="min-h-screen bg-gray-100 p-6 flex justify-center items-center">
-            <div className="w-full max-w-xl bg-zinc-900 border border-zinc-800 rounded-3xl shadow-2xl p-8">
-                
+        <div className="min-h-screen bg-gray-100 p-6 flex flex-col justify-center items-center">
+            <div className="w-full max-w-2xl bg-white border  rounded-3xl shadow-2xl p-8">
                 <div className="flex flex-col items-center">
+                    <div className="w-full flex flex-row items-center justify-end">
+                        <LogOut size={25} className="text-red-600"/>
+                    </div>
                     <div className="relative">
                         <img
-                            src="https://i.pravatar.cc/200"
-                            alt="Foto de perfil"
-                            className="w-28 h-28 rounded-full object-cover border-4 border-zinc-800"
+                            src={user?.img_profile_url}
+                            alt=""
+                            className="w-28 h-28 rounded-full object-cover border-4 border-gray-200"
                         />
 
                         <div className="absolute bottom-0 right-0 bg-zinc-800 p-2 rounded-full border border-zinc-700">
@@ -74,11 +76,11 @@ export const Account = () => {
                 >
                     {/* Name */}
                     <div>
-                        <label className="text-zinc-300 text-sm mb-2 block">
+                        <label className="text-gray-700 font-bold text-sm mb-2 block">
                             Name
                         </label>
 
-                        <div className="flex items-center bg-zinc-800 border border-zinc-700 rounded-xl px-4">
+                        <div className="flex items-center bg-gray-100 rounded-xl px-4">
                             <User size={18} className="text-zinc-400" />
 
                             <input
@@ -98,7 +100,7 @@ export const Account = () => {
 
                     {/* Email */}
                     <div>
-                        <label className="text-zinc-300 text-sm mb-2 block">
+                        <label className="text-gray-700 font-bold text-sm mb-2 block">
                             Email
                         </label>
 
@@ -106,14 +108,14 @@ export const Account = () => {
                             type="email"
                             {...register("email")}
                             disabled
-                            className="w-full bg-zinc-800 border border-zinc-700 rounded-xl px-4 py-4 text-zinc-500 cursor-not-allowed"
+                            className="w-full  bg-gray-100 rounded-xl px-4 py-4 text-zinc-500 cursor-not-allowed"
                         />
                     </div>
 
                     <button
                         disabled={isSubmitting}
                         type="submit"
-                        className="w-full bg-white text-black font-semibold py-4 rounded-xl hover:opacity-90 transition disabled:opacity-50"
+                        className="w-full bg-gray-900 text-white font-semibold py-4 rounded-xl hover:opacity-90 transition disabled:opacity-50"
                     >
                         {isSubmitting ? "Saving..." : "Save"}
                     </button>

@@ -1,6 +1,5 @@
 import { generate_safe_name } from "../utils/utils.js";
-import {supabase} from "../../supabase/supabase.js"
-
+import { supabase } from "../../supabase/supabase.js";
 export const f_upload_document = async (req_body) => {
   const allowedTypes = ["application/pdf"];
 
@@ -35,12 +34,11 @@ export const f_upload_document = async (req_body) => {
     throw new Error("the file type is not accepted");
   }
   const today = new Date();
-  const safeName = generate_safe_name(file.originalname,user_id);
+  const safeName = generate_safe_name(file.originalname, user_id);
 
-  const {
-    data: log_res,
-    error: error_create_log
-  } = await supabase.storage("from").upload(safeName, file.buffer);
+  const { data: log_res, error: error_create_log } = await supabase
+    .storage("from")
+    .upload(safeName, file.buffer);
 
   if (error_create_log) {
     throw error_create_log;
@@ -65,6 +63,4 @@ export const f_upload_document = async (req_body) => {
       file_path: data_log.data.fullPath,
     },
   });
-
-
 };

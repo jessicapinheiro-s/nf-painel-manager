@@ -6,6 +6,7 @@ import { login } from "../repository/auth-repository";
 import type { PropsUserRegister } from "../types/types-global";
 import { useUserStore } from "../store/user-store";
 import { useModalStore } from "../store/modal-store";
+import { get_user_porfile_img } from "../repository/user-repository";
 
 // Schema de validação
 const loginSchema = z.object({
@@ -26,7 +27,7 @@ const LoginPage = () => {
   } = useForm({
     resolver: zodResolver(loginSchema)
   });
-  const { setUser } = useUserStore();
+  const { setUser, setUserUrlImage } = useUserStore();
   const navigate = useNavigate();
   const { setClassName, setType, openModal, closeModal, setItem } = useModalStore();
 
@@ -36,15 +37,19 @@ const LoginPage = () => {
       return
     }
     setItem("Authenticating", "", "")
-    setClassName("w-[400px] max-h-[30vh]");
+    setClassName("w-[200px] max-h-[20vh]");
     setType("loanding");
     openModal();
 
     const res = await login({ email, password });
-
+    
     //obter url da imagem do usuário
     closeModal();
     setUser(res.data);
+
+    const url_link = await get_user_porfile_img(res.data.id);
+    setUserUrlImage(url_link);
+
     if(res.sucess) {
       navigate('/dashboard-nf');
     }

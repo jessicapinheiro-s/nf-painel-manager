@@ -3,6 +3,7 @@ import { auth } from "../middlewares/auth.js";
 import { validate } from "../middlewares/validate.js";
 import { userUpdateSchema } from "../schema/user.schema.js";
 import { update } from "../controllers/user-controller.js";
+import { get_profile_img } from "../controllers/user-controller.js";
 
 const user_router = Router();
 

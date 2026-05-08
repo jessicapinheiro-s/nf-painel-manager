@@ -15,18 +15,27 @@ export const f_update = async (req_body) => {
 };
 
 export const f_get_profile_img = async (req_params) => {
-  const { img_url } = req_params;
+  const { id } = req_params;
   
-  if (!img_url) {
+  if (!id) {
     throw new Error("user url profile image is missing");
   }
 
+  const user = await prisma.user.findUnique({
+    where: {
+      id: id
+    },
+    select: {
+      url_profile_image: true
+    }
+  })
+
   const { data: img_url_storage, error: error_get_profile_user_img } =
-    await supabase.storage().from("profile-img").getPublicUrl(img_url);
+    await supabase.storage().from("profiles-img").getPublicUrl(user.url_profile_image);
 
   if (error_get_profile_user_img) {
     throw error_get_profile_user_img;
   }
-
+ c  
   return img_url_storage;
 };
