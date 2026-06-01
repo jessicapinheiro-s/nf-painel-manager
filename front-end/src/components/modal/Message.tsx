@@ -4,7 +4,7 @@ export const MessageModal = () => {
     const { item } = useModalStore();
     return (
         <div className="mb-4">
-            <h3 className="text-xl md:text-2xl font-bold text-white leading-tight">
+            <h3 className="text-xl md:text-2xl font-bold text-gray-900 leading-tight">
                 {item.title
                     .replaceAll("-", " ")
                     .split(" ")

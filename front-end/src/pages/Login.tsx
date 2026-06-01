@@ -29,44 +29,53 @@ const LoginPage = () => {
   });
   const { setUser, setUserUrlImage } = useUserStore();
   const navigate = useNavigate();
-  const { setClassName, setType, openModal, closeModal, setItem } = useModalStore();
+  const { setClassName, setType, openModal, closeModal, setItem, isOpen } = useModalStore();
 
   const onSubmit = async ({ email, password }: PropsUserRegister) => {
     if (!email || !password) {
       console.error('no email ou no password')
       return
     }
+    console.log("isOpen", isOpen)
+
+
+    openModal();
+    setClassName("w-60 h-[200px]");
     setItem("Authenticating", "", "")
     setType("loanding");
-    openModal();
-    setClassName("w-80 max-h-40");
+    console.log("isOpen", isOpen)
 
     const res = await login({ email, password });
 
-    if(res.sucess === false) {
+    if (res.sucess === false) {
+      setClassName("w-[400px] h-[200px]");
       setType("message");
-      setItem("Authentication Error", "", "")
+      setItem("Authentication Error", res.merssage || "Internal Server Error", "");
+      openModal();
+    }
+
+    setClassName("");
+    closeModal();
+
+    if (res.sucess) {
+      navigate('/dashboard-nf');
     }
 
     //obter url da imagem do usuário
-    closeModal();
-    setClassName("");
     console.log(res.data)
     setUser(res.data);
 
     /*const url_link = await get_user_porfile_img(res.data.id);
     setUserUrlImage(url_link); 
 */
-    if (res.sucess) {
-      navigate('/dashboard-nf');
-    }
+
   };
 
   return (
     <div className="w-full min-h-screen flex items-center justify-center bg-gray-100 px-4">
       <div className="max-w-md w-full bg-white rounded-xl shadow-lg p-8">
         <div className="mb-8 text-center">
-          <h1 className="text-3xl font-bold text-gray-800">Welcome back!</h1>
+          <h1 className="text-3xl font-bold text-gray-800 ">Welcome back!</h1>
           <p className="text-gray-500 mt-2">Please login to acess your account</p>
         </div>
 

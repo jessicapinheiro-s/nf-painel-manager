@@ -23,7 +23,7 @@ export default function Modal() {
                     onClick={type !== "loanding" ? closeModal : undefined}
                 />
                 <motion.div
-                    className={`fixed inset-0 m-auto w-[900px] max-h-[50vh] bg-white rounded-2xl p-5 flex flex-col  ${className}`}
+                    className={`fixed inset-0 m-auto bg-white rounded-2xl p-5 flex flex-col  ${className}`}
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.5, delay: 0 }}

@@ -3,9 +3,10 @@ import { useModalStore } from "../store/modal-store";
 import logo from '/online-payment.png'
 import { useNavigate } from "react-router-dom";
 export const Header = () => {
-  const { openModal, setItem, setType } = useModalStore();
+  const { openModal, setItem, setType, setClassName } = useModalStore();
 
   const handleAddNF = () => {
+    setClassName("w-[900px] h-[500px]");
     setType("form-create-nf");
     setItem("Register a new Invoice", 'Upload a new Invoice', '')
     openModal();

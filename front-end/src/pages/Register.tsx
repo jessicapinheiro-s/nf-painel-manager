@@ -29,7 +29,7 @@ const RegisterPage = () => {
   } = useForm({
     resolver: zodResolver(registerSchema),
   });
-  const {setClassName, setType, openModal, closeModal, setItem} = useModalStore()
+  const { setClassName, setType, openModal, closeModal, setItem } = useModalStore()
   const navigate = useNavigate();
   const onSubmit = async ({ email, password }: PropsUserRegister) => {
     console.log(email, password)
@@ -39,17 +39,26 @@ const RegisterPage = () => {
     }
 
     setItem("Creating Account", "", "")
-    setClassName("w-80 max-h-40");
+    setClassName("w-60 h-[200px]");
     setType("loanding");
     openModal();
 
     const res = await registerUser({ email, password })
-    closeModal();
+
+    if (res.sucess === false) {
+      setClassName("w-[400px] h-[200px]");
+      setType("message");
+      setItem("Authentication Error", res.merssage || "Internal Server Error", "");
+      openModal();
+    }
+
     setClassName("");
+    closeModal();
+
   };
 
   return (
-    <div className="w-full min-h-screen flex items-center justify-center bg-gray-100 px-4">
+    <div className="w-full min-h-screen flex items-center justify-center bg-gray-100 px-4 ">
       <div className="max-w-md w-full bg-white rounded-xl shadow-lg p-8">
 
         <div className="mb-8 text-center">
