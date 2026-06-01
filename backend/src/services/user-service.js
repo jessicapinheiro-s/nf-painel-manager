@@ -36,6 +36,6 @@ export const f_get_profile_img = async (req_params) => {
   if (error_get_profile_user_img) {
     throw error_get_profile_user_img;
   }
- c  
+ 
   return img_url_storage;
 };

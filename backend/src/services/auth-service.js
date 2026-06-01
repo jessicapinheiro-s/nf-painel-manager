@@ -9,6 +9,7 @@ export const f_auth_register = async (info_req) => {
         email,
         password
     } = info_req.body;
+    
 
     if(!email || !password) {
         throw new Error ("Some parameters are missing (email, password)")
@@ -75,8 +76,3 @@ export const f_auth_login = async(info_req) => {
         user
     };
 }
-
-export const f_auth_logout = async(info_req) => {
-
-}
-

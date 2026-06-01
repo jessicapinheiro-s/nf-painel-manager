@@ -39,12 +39,13 @@ const RegisterPage = () => {
     }
 
     setItem("Creating Account", "", "")
-    setClassName("w-[200px] max-h-[20vh]");
+    setClassName("w-80 max-h-40");
     setType("loanding");
     openModal();
 
     const res = await registerUser({ email, password })
     closeModal();
+    setClassName("");
   };
 
   return (

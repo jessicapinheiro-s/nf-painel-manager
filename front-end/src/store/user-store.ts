@@ -4,6 +4,7 @@ type User = {
   user: {
     id: number,
     email: string;
+    name: string;
     img_profile_url: string
   } | null;
   userUrlImage: string,
@@ -14,6 +15,7 @@ type User = {
 export const useUserStore = create<User>((set) => ({
   user: null,
   userUrlImage: "",
+  name: "",
   setUser: (User: any) => set({ user: User }),
   setUserUrlImage: (url: any) => set({ user: url }),
 }));

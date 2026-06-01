@@ -37,20 +37,27 @@ const LoginPage = () => {
       return
     }
     setItem("Authenticating", "", "")
-    setClassName("w-[200px] max-h-[20vh]");
     setType("loanding");
     openModal();
+    setClassName("w-80 max-h-40");
 
     const res = await login({ email, password });
-    
+
+    if(res.sucess === false) {
+      setType("message");
+      setItem("Authentication Error", "", "")
+    }
+
     //obter url da imagem do usuário
     closeModal();
+    setClassName("");
+    console.log(res.data)
     setUser(res.data);
 
-    const url_link = await get_user_porfile_img(res.data.id);
-    setUserUrlImage(url_link);
-
-    if(res.sucess) {
+    /*const url_link = await get_user_porfile_img(res.data.id);
+    setUserUrlImage(url_link); 
+*/
+    if (res.sucess) {
       navigate('/dashboard-nf');
     }
   };

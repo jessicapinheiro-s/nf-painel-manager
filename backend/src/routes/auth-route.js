@@ -12,6 +12,6 @@ var auth_router = Router();
 /* GET users listing. */
 auth_router.post("/register", validate(schemaAuthRegister), authLimiter, auth_register);
 auth_router.post("/login", validate(schemaAuthLogin), authLimiter, auth_login);
-auth_router.get("/logout", auth, auth_logout);
+auth_router.post("/logout", auth, auth_logout);
 
 export default auth_router;

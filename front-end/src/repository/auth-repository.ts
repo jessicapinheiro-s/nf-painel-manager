@@ -41,13 +41,26 @@ export const login = async ({ email, password }: PropsUserLogin) => {
       body: JSON.stringify({ email, password }),
     });
 
-    if (!response.ok) {
-      return {
-        sucess: false,
-      };
+    console.log(response);
+
+    if (response.ok) {
+      const data = await response.json();
+
+      return data;
     }
-    const data = await response.json();
-    return data;
+  } catch (error) {
+    return {
+      sucess: false,
+    };
+  }
+};
+
+export const logOut = async () => {
+  try {
+    return await fetch(`${URL}/auth/logout`, {
+      method: "POST",
+      credentials: "include",
+    });
   } catch (error) {
     throw error;
   }
